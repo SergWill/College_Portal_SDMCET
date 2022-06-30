@@ -1,3 +1,4 @@
+from re import sub
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
@@ -198,15 +199,23 @@ def student_view_result(request):
 
 def student_oe(request):
     student = Students.objects.get(admin = request.user.id)
+    print(request.user.id , " THIS IS THE USER ID ")
     semester_id = student.semester_id.id
     semester = Semester.objects.get(id = semester_id)
     print(semester.semester_name, " SEMESTER")
     subjects = Subjects_OE.objects.filter(semester_id = semester.id)
+    elected_subjects = Forms_OE.objects.filter(username_id = request.user.id)
+    print(elected_subjects, " THIS are the elected subjects")
+    # for elected_subject in elected_subjects:
+        # print(elected_subject.subject_name.subject_name, " NAME")
+        # opted_sub = Subjects_OE.objects.get(id = elected_subject.subject_name.subject_name)
+    # print(opted_sub, " THESE ARE THE OPTED ONES")
+    
     # semesters = Semester_OE.objects.all()
 
     contexts = {
         "subjects": subjects,
-        # "semesters": semesters
+        "elected_subjects" : elected_subjects,
     }
     return render(request, 'student_template/student_open_electives.html', contexts)
 
@@ -218,20 +227,52 @@ def student_oe_save(request):
         username = Students.objects.get(admin = request.user.id)
         semester_id = username.semester_id.id
         semester = Semester_OE.objects.get(id = semester_id)
-        print(semester.id, " SEMESTER SAVE")
-        
 
         # username = request.POST.get('username')
         open_elective_name = request.POST.get('open_elective_id')
         # oe_semester = request.POST.get('semester_id')
         print(username.id , " USERNAM SAVE")
         print(open_elective_name , "OPEN ELECTIVE SAVE")
-        print(semester.id , " SEMESTER SAVE")
+        # print(semester.id , " SEMESTER SAVE")
+
+        # subjects = Subjects_OE.objects.filter(semester_id = semester.id)
+        elected_subjects = Forms_OE.objects.filter(username_id = request.user.id)
+        for elected_subject in elected_subjects:
+            print(elected_subject.subject_name.id, " THis is teh subjecct name for elected subject" )
+            if ( int(open_elective_name) == int(elected_subject.subject_name.id) ):
+                messages.error(request ,"You've already opted the subject")
+                return redirect('student_home')
+
+        print(len(elected_subjects) , " is the length of all the subjects the user has opted")
+        print(semester.semester_name, " SEMESTER Name")
+        if int(semester.semester_name) ==5 :
+            print( " ENTERING __________________________")
+            if len(elected_subjects) >= 3 :
+                messages.error(request ,"You've already opted all the Electives")
+                return redirect('student_home')
+        elif int(semester.semester_name) == 3 :
+            print("Entered 3rd Sem")
+            if len(elected_subjects) >= 1 :
+                messages.error(request,"You've already opted all the Electives")
+                return redirect('student_home')
+        elif( int(semester.semester_name) == 6):
+            if len(elected_subjects) >= 2 :
+                messages.error(request,"You've already opted all the Electives")
+                return redirect('student_home')
+        elif(  int(semester.semester_name) == 7):
+            if len(elected_subjects) >= 3 :
+                messages.error(request,"You've already opted all the Electives")
+                return redirect('student_home')
+        elif(   int(semester.semester_name) == 8):
+            if len(elected_subjects) >= 3 :
+                messages.error(request,"You've already opted all the Electives")
+                return redirect('student_home')
+    
         try:
             # INSERTING into  Model
             print("Creating Open Elective")
-            print( username.id , open_elective_name , semester.id)
-            open_elective = Forms_OE(subject_name_id=open_elective_name,username_id=username.id,semester_name_id=semester.id)
+            print( request.user.id , open_elective_name , semester.id)
+            open_elective = Forms_OE(subject_name_id=open_elective_name,username_id=request.user.id,semester_name_id=semester.id)
             print(open_elective)
             open_elective.save()
             print("saved")

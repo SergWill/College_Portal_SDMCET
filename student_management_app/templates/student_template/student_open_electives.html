@@ -82,6 +82,38 @@
                                 </select>
                             </div>
 
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                     <table class="table">
+                                         <thead class="thead-light">
+                                         <tr>
+                                             <th>ID</th>    
+                                             <th>Elected Subjects</th>
+                                         </tr>
+                                         </thead>
+                                         
+                                         {% for elected_subject in elected_subjects %}
+                                         <tr>
+                                             <td>{{ elected_subject.id }}</td>
+                                             <td>{{ elected_subject.subject_name.subject_name }}</td>
+                                         </tr>
+                                         {% endfor %}
+                                     </table>
+                                 </div>
+                             </div>
+
+
+                             
+                            <!-- <div class="form-group">
+                                <label>Opted Open Electives</label>
+                                <label class="form-control " name="open_elective_id" id="semester_id">
+                                    {% for elected_subject in elected_subjects %}
+                                        <label value="{{ elected_subject.id }}">{{ elected_subject.subject_name.subject_name }}</label><br>
+                                    {% endfor %}
+                                </label>
+                            </div> -->
+
                             <!-- <div class="form-group">
                                 <label>Opted Open Electives</label>
                                 <label class="form-control " name="open_elective_id" id="semester_id">
