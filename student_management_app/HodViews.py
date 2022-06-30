@@ -622,10 +622,12 @@ def add_student(request):
     subjects = Subjects.objects.all()
     session_years = SessionYearModel.objects.all()
     semester = Semester.objects.all()
+    courses = Courses.objects.all()
     context = {
         "subjects": subjects,
         "session_years": session_years,
         "semesters": semester,
+        "courses":courses,
         # "form": form
     }
     return render(request, "hod_template/add_student_template.html", context)  
@@ -688,6 +690,10 @@ def add_student_save(request):
                 print(session_year_id , " searching for this")
                 session_year_obj = SessionYearModel.objects.get(id=session_year_id)
                 print(session_year_obj , " This is the session")
+                course = request.POST.get('course_id')
+                course_id = Courses.objects.get(id = course)
+
+                user.students.course_id = course_id
                 # semister_obj=Semisters.objects.get(id=semister_id)
                 # user.students.semister_id=semister_obj
                 # user.students.session_start_year=session_start
@@ -734,6 +740,10 @@ def add_student_save(request):
             # semister_obj=Semesters.objects.get(id=semister_id)
             # user.students.semister_id=semister_obj
             user.students.session_year_id = session_year_obj
+            course = request.POST.get('course_id')
+            course_id = Courses.objects.get(id = course)
+
+            user.students.course_id = course_id
             print("year added")
             user.students.gender=sex
             print("SEx added")
