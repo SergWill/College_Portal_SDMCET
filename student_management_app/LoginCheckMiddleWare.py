@@ -45,7 +45,8 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                 return redirect("login")
 
         else:
-            if request.path == reverse("login") or request.path == reverse("doLogin"):
-                pass
-            else:
+            path = request.path_info
+            if(path=='/'):
+                return None;
+            if not any(url.match(path) for url in EXEMPT_URLS):
                 return redirect("login")
