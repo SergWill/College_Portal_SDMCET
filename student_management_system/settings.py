@@ -14,7 +14,7 @@ SECRET_KEY = '(i#*06f#keydy_fh17bf=$0f6v)^wr^l7*u4gq42m*sztu#2_m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["education-management-system-a.herokuapp.com"]
+ALLOWED_HOSTS = ["education-management-system-a.herokuapp.com",'127.0.0.1']
 
 
 # Application definition
@@ -35,6 +35,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'student_management_app.LoginCheckMiddleWare.LoginCheckMiddleWare',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -43,7 +44,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'student_management_app.LoginCheckMiddleWare.LoginCheckMiddleWare',
 ]
 
 ROOT_URLCONF = 'student_management_system.urls'
@@ -142,8 +142,16 @@ LOGIN_EXEMPT_URLS= [
    ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST_USER = ''
+
+
+# from django.core.mail import EmailMessage
+# email = EmailMessage('Hello', 'World', to=['user@gmail.com'])
+# email.send()
+
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
+
+
+EMAIL_HOST_USER = 'collegeproject20@gmail.com'
+EMAIL_HOST_PASSWORD = "qtvptfetaqhaxhbs"
 EMAIL_USE_TLS = True
-EMAIL_HOST_PASSWORD = ""

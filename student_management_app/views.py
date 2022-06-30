@@ -20,6 +20,8 @@ def go_here(request):
     if request.method == 'GET':
        return render(request , 'index.html')
 
+from django.core.mail import EmailMessage
+
 def reset_password(request):
     if not 'email' in request.POST is None:
         email = request.POST.get('email')
@@ -50,7 +52,7 @@ def sending_email(request):
         key = user.random_key
         email_mesg ='Well you forgot your email So I\'m here now. Your key for new password is ' + str(key)
         print(email_mesg)
-        # send_mail("Reset Password OTP",email_mesg , email ,[request.POST.get('otp_email')], fal_silently=False)
+        send_mail("Reset Password OTP",email_mesg , 'collegeproject20@gmail.com' ,[request.POST.get('otp_email')], fail_silently=False)
         return render(request, "otpSignIn.html",{"otp1_email": request.POST.get('otp_email')})
     print("not working")
     return render(request, "index.html")
