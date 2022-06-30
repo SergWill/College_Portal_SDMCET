@@ -1188,9 +1188,13 @@ def staff_feedback_message(request):
 
 def manage_oe_list(request):
     form = Forms_OE.objects.all()
+    semester = Semester_OE.objects.all()
+    # students = Students.objects.filter(username= form.username.username)
+    
     print(form)
     context = {
-        "form": form
+        "form": form,
+        "semester": semester,
     }
     return render(request, 'hod_template/manage_oe_list.html', context)
 
