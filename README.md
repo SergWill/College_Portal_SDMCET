@@ -38,3 +38,21 @@ The Functionalities of the Staff login are :
 3. Add/Update Result
 4. Apply for Leave
 5. Send Feedback to HOD
+
+
+The Functionalities of the Student Login are : 
+
+1. See the Overall Summary Charts related to their attendance, their subjects, leave status, etc.
+2. View Attendance
+3. View Result
+4. Apply for Leave
+5. Send Feedback to HOD
+
+
+
+For further details contact :
+  Sourav Mitra : mitram969@gmail.com
+  Pranav Bhat : pranavbhat3105@gmail.com 
+  Harshat Dhanayat : dhanayat.harshat@gmail.com
+  Neetya Halarnkar : neetuh1999@gmail.com
+
