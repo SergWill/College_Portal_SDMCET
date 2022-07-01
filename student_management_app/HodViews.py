@@ -324,14 +324,6 @@ def add_sem_open_electives_save(request):
 
 
 
-
-
-
-
-
-
-
-
 def add_subj_open_electives(request):
     courses = Courses.objects.all()
     semester = Semester.objects.all()
