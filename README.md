@@ -1,10 +1,10 @@
 This is a project by A19 batch of SDMCET college, Computer Science Engineering
 
 The team consists of :
-  Pranav Bhat 2SD18CS028 
-  Harshat Dhanayat 2SD18CS031
-  Neetya Halarnkar 2SD18CS038
-  Sourav Mitra 2SD18CS113
+    Pranav Bhat 2SD18CS028 
+    Harshat Dhanayat 2SD18CS031
+    Neetya Halarnkar 2SD18CS038
+    Sourav Mitra 2SD18CS113
  
 This is project is under the guidance of : Prof. Sandhya S V
 
